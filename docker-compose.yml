@@ -1,0 +1,34 @@
+version: "3.4"
+
+services:
+
+  mysql-service:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_DATABASE: 'test'
+
+  scopeagent-reference-springboot2:
+    build: .
+    image: scope/scopeagent-reference-springboot2:${JDK}-${COMMIT}
+    environment:
+      - CI
+      - SCOPE_APIKEY
+      - SCOPE_API_ENDPOINT
+      - JENKINS_URL
+      - CIRCLECI
+      - CIRCLE_BUILD_NUM
+      - CIRCLE_BUILD_URL
+      - BUILD_ID
+      - BUILD_NUMBER
+      - BUILD_URL
+      - JDK=${JDK}
+      - JAVA_PROFILE=${JAVA_PROFILE}
+      - GIT_COMMIT=${GIT_COMMIT}
+    links:
+      - mysql-service
+    depends_on:
+      - mysql-service

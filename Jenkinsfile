@@ -1,21 +1,42 @@
 pipeline {
-    agent none
+    agent any
+
     stages {
         stage('Build') {
             parallel {
-                stage('JDK1.8') {
-                    agent { docker 'openjdk:8-jdk' }
+                /*stage('JDK1.8') {
                     steps {
-                        sh './mvnw -fae verify -Pjava8'
+                        sh 'JDK=8-jdk COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} build --build-arg JDK="8-jdk"'
                     }
-                }
+                }*/
                 stage('JDK11') {
-                    agent { docker 'openjdk:11-jdk' }
                     steps {
-                        sh './mvnw -fae verify -Pjava11'
+                        sh 'JDK=11-jdk COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} build --build-arg JDK="11-jdk"'
                     }
                 }
             }
+        }
+
+        stage('Test'){
+            parallel {
+                /*stage('JDK1.8') {
+                    steps {
+                        sh 'JDK=8-jdk JAVA_PROFILE=java8 COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2 scopeagent-reference-springboot2'
+                    }
+                }*/
+                stage('JDK11') {
+                    steps {
+                        sh 'JDK=11-jdk JAVA_PROFILE=java11 COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2 scopeagent-reference-springboot2'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            /*sh 'JDK=8-jdk COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} down -v'*/
+            sh 'JDK=11-jdk COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} down -v'
         }
     }
 
