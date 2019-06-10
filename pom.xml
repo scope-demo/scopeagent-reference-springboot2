@@ -29,6 +29,7 @@
     <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
 
     <scope.agent.version>0.1.4</scope.agent.version>
+
   </properties>
 
   <dependencies>

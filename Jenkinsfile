@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             parallel {
-                stage('JDK1.8') {
+                /*stage('JDK1.8') {
                     steps {
-                        sh 'JDK=8-jdk JAVA_PROFILE=java8 COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} build'
+                        sh 'JDK=8-jdk COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} build --build-arg JDK="8-jdk"'
                     }
-                }
+                }*/
                 stage('JDK11') {
                     steps {
-                        sh 'JDK=11-jdk JAVA_PROFILE=java11 COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} build'
+                        sh 'JDK=11-jdk COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} build --build-arg JDK="11-jdk"'
                     }
                 }
             }
@@ -19,14 +19,14 @@ pipeline {
 
         stage('Test'){
             parallel {
-                stage('JDK1.8') {
+                /*stage('JDK1.8') {
                     steps {
-                        sh 'JDK=8-jdk COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2:8-jdk-$COMMIT scopeagent-reference-springboot2:8-jdk-$COMMIT'
+                        sh 'JDK=8-jdk JAVA_PROFILE=java8 COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2 scopeagent-reference-springboot2'
                     }
-                }
+                }*/
                 stage('JDK11') {
                     steps {
-                        sh 'JDK=11-jdk COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2:11-jdk-$COMMIT scopeagent-reference-springboot2:11-jdk-$COMMIT'
+                        sh 'JDK=11-jdk JAVA_PROFILE=java11 COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2 scopeagent-reference-springboot2'
                     }
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
 
     post {
         always {
-            sh 'JDK=8-jdk COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} down -v'
+            /*sh 'JDK=8-jdk COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} down -v'*/
             sh 'JDK=11-jdk COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} down -v'
         }
     }

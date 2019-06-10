@@ -1,0 +1,1 @@
+./mvnw -fae verify -P${JAVA_PROFILE}

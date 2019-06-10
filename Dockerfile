@@ -1,4 +1,5 @@
-FROM openjdk:$JDK
+ARG JDK
+FROM openjdk:${JDK}
 WORKDIR /app
 COPY . /app
-RUN ./mvnw -fae verify -P$JAVA_PROFILE
+ENTRYPOINT [ "sh", "./entrypoint.sh" ]
