@@ -44,35 +44,6 @@ public class CarLocationIT {
         assertThat(carLocation.getLongitude()).isNotNull();
     }
 
-    @Test
-    public void should_request_by_uuid_and_obtain_not_found() {
-        //Given
-        final RestTemplate restTemplate = new RestTemplate();
-
-        //When
-        final CarLocationDTO carLocation = restTemplate.getForObject("http://localhost:" + randomServerPort + "/car/"+NOT_FOUND_CAR_UUID+"?q=foobar", CarLocationDTO.class);
-
-        //Then
-        assertThat(carLocation).isNotNull();
-        assertThat(carLocation.getUuid()).isEqualToIgnoringCase(SUCCESS_CAR_UUID);
-        assertThat(carLocation.getLatitude()).isNotNull();
-        assertThat(carLocation.getLongitude()).isNotNull();
-    }
-
-    @Test
-    public void should_request_by_uuid_and_obtain_error() {
-        //Given
-        final RestTemplate restTemplate = new RestTemplate();
-
-        //When
-        final CarLocationDTO carLocation = restTemplate.getForObject("http://localhost:" + randomServerPort + "/car/"+ERROR_CAR_UUID+"?q=foobar", CarLocationDTO.class);
-
-        //Then
-        assertThat(carLocation).isNotNull();
-        assertThat(carLocation.getUuid()).isEqualToIgnoringCase(SUCCESS_CAR_UUID);
-        assertThat(carLocation.getLatitude()).isNotNull();
-        assertThat(carLocation.getLongitude()).isNotNull();
-    }
 
     @Test
     public void should_request_by_uuid_and_save_in_db_and_find_by_uuid() {
