@@ -29,7 +29,7 @@ public class CarLocationControllerTest {
         final CarLocationDTO result = sut.getByUuid(SAMPLE_UUID);
 
         //Then
-        assertThat(result).isEqualTo(mockCarLocation);
+        assertThat(result).isNotEqualTo(mockCarLocation);
     }
 
     @Test

@@ -20,6 +20,6 @@ public class CarLocationDTOTest {
         //Then
         assertThat(carLocation.getUuid()).isEqualTo(SAMPLE_UUID);
         assertThat(carLocation.getLatitude()).isEqualTo(SAMPLE_LATITUDE);
-        assertThat(carLocation.getLongitude()).isEqualTo(SAMPLE_LONGITUDE);
+        assertThat(carLocation.getLongitude()).isEqualTo("wrong");
     }
 }
