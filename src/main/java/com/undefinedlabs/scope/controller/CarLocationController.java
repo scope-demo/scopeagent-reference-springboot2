@@ -33,7 +33,7 @@ public class CarLocationController {
     }
 
     @RequestMapping(value = "/db/{uuid}", method = RequestMethod.GET)
-    public List<CarLocationDTO> save(@PathVariable(name="uuid") String uuid){
+    public List<CarLocationDTO> findDB(@PathVariable(name="uuid") String uuid){
         return this.carLocationService.findByUuidAllDB(uuid);
     }
 
