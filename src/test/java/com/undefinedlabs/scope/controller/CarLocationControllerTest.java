@@ -46,4 +46,19 @@ public class CarLocationControllerTest {
         //Then
         assertThat(carLocationDTOS).contains(mockCarLocation);
     }
+
+    @Test
+    public void should_invoke_service_to_find_all_in_db() {
+        //Given
+        final CarLocationDTO mockCarLocation = mock(CarLocationDTO.class);
+        final CarLocationService mockService = mock(CarLocationService.class);
+        when(mockService.findByUuidAllDB(SAMPLE_UUID)).thenReturn(Collections.singletonList(mockCarLocation));
+        final CarLocationController sut = new CarLocationController(mockService);
+
+        //When
+        final List<CarLocationDTO> carLocationDTOS = sut.findDB(SAMPLE_UUID);
+
+        //Then
+        assertThat(carLocationDTOS).contains(mockCarLocation);
+    }
 }
