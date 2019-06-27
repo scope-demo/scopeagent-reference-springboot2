@@ -1,0 +1,8 @@
+[scope.mode]
+testing = true
+
+[scope.tracer]
+global = true
+
+[scope.instrumentation]
+enabled = true
