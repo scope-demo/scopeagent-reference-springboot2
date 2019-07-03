@@ -29,7 +29,7 @@
     <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
 
     <grpc-spring-boot-starter.version>3.3.0</grpc-spring-boot-starter.version>
-    <scope.agent.version>0.1.6</scope.agent.version>
+    <scope.agent.version>0.1.7-beta.1</scope.agent.version>
 
   </properties>
 

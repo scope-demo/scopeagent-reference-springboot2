@@ -68,7 +68,7 @@ public class CarPlateController {
 
         stub.getCarPlate(CarPlateRequest.newBuilder().setUuid(uuid).build(), responseObserver);
 
-        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, 1, TimeUnit.SECONDS)) {
+        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, 10, TimeUnit.SECONDS)) {
             throw new RuntimeException("timeout!");
         }
 
@@ -118,7 +118,7 @@ public class CarPlateController {
         requestStream.onNext(carPlateRequest);
         requestStream.onCompleted();
 
-        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, 1, TimeUnit.SECONDS)) {
+        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, 10, TimeUnit.SECONDS)) {
             throw new RuntimeException("timeout!");
         }
 
