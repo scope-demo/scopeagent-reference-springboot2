@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/carlocation")
 public class CarLocationController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CarLocationController.class);
@@ -33,7 +33,7 @@ public class CarLocationController {
     }
 
     @RequestMapping(value = "/db/{uuid}", method = RequestMethod.GET)
-    public List<CarLocationDTO> findDB(@PathVariable(name="uuid") String uuid){
+    public List<CarLocationDTO> save(@PathVariable(name="uuid") String uuid){
         return this.carLocationService.findByUuidAllDB(uuid);
     }
 

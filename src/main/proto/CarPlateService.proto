@@ -1,0 +1,19 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.undefinedlabs.scope.service;
+
+message CarPlateRequest {
+    string uuid = 1;
+}
+
+message CarPlateResponse {
+    string carPlate = 1;
+}
+
+service CarPlateService {
+
+    rpc getCarPlate(CarPlateRequest) returns (CarPlateResponse);
+
+    rpc getCarPlates(stream CarPlateRequest) returns (stream CarPlateResponse);
+
+}
