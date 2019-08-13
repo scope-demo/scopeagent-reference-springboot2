@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/carlocation")
 public class CarLocationController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CarLocationController.class);
