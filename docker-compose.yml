@@ -13,7 +13,7 @@ services:
 
   scopeagent-reference-springboot2:
     build: .
-    image: scope/scopeagent-reference-springboot2:${JDK}-${COMMIT}
+    image: scope/scopeagent-reference-springboot2
     environment:
       - CI
       - SCOPE_APIKEY
@@ -28,6 +28,8 @@ services:
       - JDK=${JDK}
       - JAVA_PROFILE=${JAVA_PROFILE}
       - GIT_COMMIT=${GIT_COMMIT}
+    volumes:
+      - ~/.scope:/root/.scope
     links:
       - mysql-service
     depends_on:
