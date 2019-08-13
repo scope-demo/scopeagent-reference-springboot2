@@ -1,1 +1,1 @@
-./mvnw -fae verify -P${JAVA_PROFILE}
+./mvnw -fae verify -Pjava11
