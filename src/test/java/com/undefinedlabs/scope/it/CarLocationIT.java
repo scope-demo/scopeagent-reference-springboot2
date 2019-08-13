@@ -28,6 +28,10 @@ public class CarLocationIT {
     @LocalServerPort
     private int randomServerPort;
 
+    @Test
+    public void smoke_test(){
+        assertThat(true).isTrue();
+    }
 
     @Test
     public void should_request_by_uuid_and_obtain_car_location() {
@@ -35,7 +39,7 @@ public class CarLocationIT {
         final RestTemplate restTemplate = new RestTemplate();
 
         //When
-        final CarLocationDTO carLocation = restTemplate.getForObject("http://localhost:" + randomServerPort + "/car/"+SUCCESS_CAR_UUID+"?q=foobar", CarLocationDTO.class);
+        final CarLocationDTO carLocation = restTemplate.getForObject("http://localhost:" + randomServerPort + "/carlocation/"+SUCCESS_CAR_UUID+"?q=foobar", CarLocationDTO.class);
 
         //Then
         assertThat(carLocation).isNotNull();
@@ -44,14 +48,43 @@ public class CarLocationIT {
         assertThat(carLocation.getLongitude()).isNotNull();
     }
 
+    /*@Test
+    public void should_request_by_uuid_and_obtain_not_found() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final CarLocationDTO carLocation = restTemplate.getForObject("http://localhost:" + randomServerPort + "/carlocation/"+NOT_FOUND_CAR_UUID+"?q=foobar", CarLocationDTO.class);
+
+        //Then
+        assertThat(carLocation).isNotNull();
+        assertThat(carLocation.getUuid()).isEqualToIgnoringCase(SUCCESS_CAR_UUID);
+        assertThat(carLocation.getLatitude()).isNotNull();
+        assertThat(carLocation.getLongitude()).isNotNull();
+    }*/
+
+    /*@Test
+    public void should_request_by_uuid_and_obtain_error() {
+        //Given
+        final RestTemplate restTemplate = new RestTemplate();
+
+        //When
+        final CarLocationDTO carLocation = restTemplate.getForObject("http://localhost:" + randomServerPort + "/carlocation/"+ERROR_CAR_UUID+"?q=foobar", CarLocationDTO.class);
+
+        //Then
+        assertThat(carLocation).isNotNull();
+        assertThat(carLocation.getUuid()).isEqualToIgnoringCase(SUCCESS_CAR_UUID);
+        assertThat(carLocation.getLatitude()).isNotNull();
+        assertThat(carLocation.getLongitude()).isNotNull();
+    }*/
 
     @Test
     public void should_request_by_uuid_and_save_in_db_and_find_by_uuid() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
-        final CarLocationDTO carLocationRemote = restTemplate.getForObject("http://localhost:" + randomServerPort + "/car/"+SUCCESS_CAR_UUID, CarLocationDTO.class);
-        restTemplate.postForObject("http://localhost:" + randomServerPort + "/car/", carLocationRemote, List.class);
-        final ResponseEntity<List<CarLocationDTO>> exchange = restTemplate.exchange("http://localhost:" + randomServerPort + "/car/db/" + SUCCESS_CAR_UUID, HttpMethod.GET, null, new ParameterizedTypeReference<List<CarLocationDTO>>() {});
+        final CarLocationDTO carLocationRemote = restTemplate.getForObject("http://localhost:" + randomServerPort + "/carlocation/"+SUCCESS_CAR_UUID, CarLocationDTO.class);
+        restTemplate.postForObject("http://localhost:" + randomServerPort + "/carlocation/", carLocationRemote, List.class);
+        final ResponseEntity<List<CarLocationDTO>> exchange = restTemplate.exchange("http://localhost:" + randomServerPort + "/carlocation/db/" + SUCCESS_CAR_UUID, HttpMethod.GET, null, new ParameterizedTypeReference<List<CarLocationDTO>>() {});
         final List<CarLocationDTO> carLocationFromDbList = exchange.getBody();
 
         assertThat(carLocationFromDbList).isNotNull();

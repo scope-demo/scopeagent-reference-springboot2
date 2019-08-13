@@ -4,10 +4,6 @@ import com.undefinedlabs.scope.model.dto.CarLocationDTO;
 import com.undefinedlabs.scope.service.CarLocationService;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,35 +26,5 @@ public class CarLocationControllerTest {
 
         //Then
         assertThat(result).isEqualTo(mockCarLocation);
-    }
-
-    @Test
-    public void should_invoke_service_to_save_all_in_db() {
-        //Given
-        final CarLocationDTO mockCarLocation = mock(CarLocationDTO.class);
-        final CarLocationService mockService = mock(CarLocationService.class);
-        when(mockService.saveAllDB(mockCarLocation)).thenReturn(Collections.singletonList(mockCarLocation));
-        final CarLocationController sut = new CarLocationController(mockService);
-
-        //When
-        final List<CarLocationDTO> carLocationDTOS = sut.saveAllDB(mockCarLocation);
-
-        //Then
-        assertThat(carLocationDTOS).contains(mockCarLocation);
-    }
-
-    @Test
-    public void should_invoke_service_to_find_all_in_db() {
-        //Given
-        final CarLocationDTO mockCarLocation = mock(CarLocationDTO.class);
-        final CarLocationService mockService = mock(CarLocationService.class);
-        when(mockService.findByUuidAllDB(SAMPLE_UUID)).thenReturn(Collections.singletonList(mockCarLocation));
-        final CarLocationController sut = new CarLocationController(mockService);
-
-        //When
-        final List<CarLocationDTO> carLocationDTOS = sut.findDB(SAMPLE_UUID);
-
-        //Then
-        assertThat(carLocationDTOS).contains(mockCarLocation);
     }
 }
