@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/carplate")
 public class CarPlateController {
 
+    private static final int TIMEOUT = 10;
     private final CarPlateServiceImpl carPlateService;
 
     @LocalRunningGrpcPort
@@ -68,7 +69,7 @@ public class CarPlateController {
 
         stub.getCarPlate(CarPlateRequest.newBuilder().setUuid(uuid).build(), responseObserver);
 
-        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, 1, TimeUnit.SECONDS)) {
+        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, TIMEOUT, TimeUnit.SECONDS)) {
             throw new RuntimeException("timeout!");
         }
 
@@ -118,7 +119,7 @@ public class CarPlateController {
         requestStream.onNext(carPlateRequest);
         requestStream.onCompleted();
 
-        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, 1, TimeUnit.SECONDS)) {
+        if (!Uninterruptibles.awaitUninterruptibly(finishLatch, TIMEOUT, TimeUnit.SECONDS)) {
             throw new RuntimeException("timeout!");
         }
 
