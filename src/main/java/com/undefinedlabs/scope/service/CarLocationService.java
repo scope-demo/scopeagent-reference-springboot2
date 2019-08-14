@@ -1,9 +1,12 @@
 package com.undefinedlabs.scope.service;
 
+import com.undefinedlabs.scope.controller.CarLocationController;
 import com.undefinedlabs.scope.db.h2.repository.H2CarLocationRepository;
 import com.undefinedlabs.scope.db.mysql.repository.MySQLCarLocationRepository;
 import com.undefinedlabs.scope.model.dto.CarLocationDTO;
 import com.undefinedlabs.scope.model.entity.CarLocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +18,7 @@ import java.util.List;
 @Service
 public class CarLocationService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CarLocationService.class);
     private static final String CAR_LOCATION_URL = "http://flask-example-project.codescope.com:8000/car/";
 
     private final RestTemplate restTemplate;
@@ -30,11 +34,14 @@ public class CarLocationService {
     }
 
     public CarLocationDTO getFromRemote(final String uuid){
+        LOGGER.info("CarLocation Service getFromRemote: " + uuid);
         return restTemplate.getForEntity(CAR_LOCATION_URL + uuid, CarLocationDTO.class).getBody();
     }
 
     @Transactional
     public List<CarLocationDTO> saveAllDB(final CarLocationDTO carLocation) {
+        LOGGER.info("CarLocation Service saveAllDB: " + carLocation);
+
         final CarLocation entity = new CarLocation(carLocation.getUuid(), carLocation.getLatitude(), carLocation.getLongitude());
         final CarLocation h2EntitySaved = h2CarLocationRepository.save(entity);
         final CarLocation mySqlEntitySaved = mySqlCarLocationRepository.save(entity);
@@ -46,6 +53,8 @@ public class CarLocationService {
     }
 
     public List<CarLocationDTO> findByUuidAllDB(final String uuid) {
+        LOGGER.info("CarLocation Service findByUuidAllDB: " + uuid);
+
         final CarLocation h2CarLocationByUuid = this.h2CarLocationRepository.findByUuid(uuid).orElse(new CarLocation("",0.0,0.0));
         final CarLocation mySqlCarLocationByUuid = this.mySqlCarLocationRepository.findByUuid(uuid).orElse(new CarLocation("",0.0,0.0));
         return Arrays.asList(

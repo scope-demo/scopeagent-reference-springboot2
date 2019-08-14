@@ -24,16 +24,19 @@ public class CarLocationController {
 
     @RequestMapping(value = "/{uuid}", method = RequestMethod.GET)
     public CarLocationDTO getByUuid(@PathVariable(name="uuid") String uuid){
+        LOGGER.info("CarLocationController getByUuid: "+uuid);
         return this.carLocationService.getFromRemote(uuid);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public List<CarLocationDTO> saveAllDB(@RequestBody CarLocationDTO carLocation){
+        LOGGER.info("CarLocationController saveAllDB: "+carLocation);
         return this.carLocationService.saveAllDB(carLocation);
     }
 
     @RequestMapping(value = "/db/{uuid}", method = RequestMethod.GET)
     public List<CarLocationDTO> save(@PathVariable(name="uuid") String uuid){
+        LOGGER.info("CarLocationController save: "+uuid);
         return this.carLocationService.findByUuidAllDB(uuid);
     }
 

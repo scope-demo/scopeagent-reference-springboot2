@@ -22,7 +22,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class CarLocationIT {
 
     private static final String SUCCESS_CAR_UUID = "9E219725-490E-4509-A42D-D0388DF317D4";
-    private static final String NOT_FOUND_CAR_UUID = "";
+    private static final String NOT_FOUND_CAR_UUID = "notfound";
     private static final String ERROR_CAR_UUID = "9E219725-490E-4509-A42D-D0388DF317DG";
 
     @LocalServerPort
@@ -48,7 +48,7 @@ public class CarLocationIT {
         assertThat(carLocation.getLongitude()).isNotNull();
     }
 
-    /*@Test
+    @Test
     public void should_request_by_uuid_and_obtain_not_found() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
@@ -61,9 +61,9 @@ public class CarLocationIT {
         assertThat(carLocation.getUuid()).isEqualToIgnoringCase(SUCCESS_CAR_UUID);
         assertThat(carLocation.getLatitude()).isNotNull();
         assertThat(carLocation.getLongitude()).isNotNull();
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void should_request_by_uuid_and_obtain_error() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
@@ -76,7 +76,7 @@ public class CarLocationIT {
         assertThat(carLocation.getUuid()).isEqualToIgnoringCase(SUCCESS_CAR_UUID);
         assertThat(carLocation.getLatitude()).isNotNull();
         assertThat(carLocation.getLongitude()).isNotNull();
-    }*/
+    }
 
     @Test
     public void should_request_by_uuid_and_save_in_db_and_find_by_uuid() {

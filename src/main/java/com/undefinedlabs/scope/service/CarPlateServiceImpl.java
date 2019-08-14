@@ -1,11 +1,17 @@
 package com.undefinedlabs.scope.service;
 
+
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @GRpcService
 public class CarPlateServiceImpl extends com.undefinedlabs.scope.service.CarPlateServiceGrpc.CarPlateServiceImplBase {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CarPlateServiceImpl.class);
+
 
     private static final String SUCCESS_CAR_UUID = "9E219725-490E-4509-A42D-D0388DF317D4";
     private static final String NOT_FOUND_CAR_UUID = "asd";
@@ -15,6 +21,7 @@ public class CarPlateServiceImpl extends com.undefinedlabs.scope.service.CarPlat
 
     @Override
     public void getCarPlate(com.undefinedlabs.scope.service.CarPlateRequest request, StreamObserver<CarPlateResponse> responseObserver) {
+        LOGGER.info("---- CarPlateService getCarPlate " + request.getUuid());
         final String uuid = request.getUuid();
         switch (uuid) {
             case SUCCESS_CAR_UUID:

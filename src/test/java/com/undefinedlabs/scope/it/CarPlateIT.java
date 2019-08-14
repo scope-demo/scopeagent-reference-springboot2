@@ -56,7 +56,7 @@ public class CarPlateIT {
         }
     }
 
-    /*@Test
+    @Test
     public void should_obtain_not_found_car_plate_by_uuid() {
         //Given
         final RestTemplate restTemplate = new RestTemplate();
@@ -80,6 +80,6 @@ public class CarPlateIT {
         //Then
         assertThat(carPlate).isNotNull();
         assertThat(carPlate.getCarPlate()).isNotNull();
-    }*/
+    }
 
 }
