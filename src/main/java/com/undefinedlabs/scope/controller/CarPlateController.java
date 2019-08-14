@@ -10,6 +10,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.context.LocalRunningGrpcPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/carplate")
 public class CarPlateController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CarPlateController.class);
     private static final int TIMEOUT = 10;
     private final CarPlateServiceImpl carPlateService;
 
@@ -39,7 +42,7 @@ public class CarPlateController {
 
     @RequestMapping(value = "/{uuid}", method = RequestMethod.GET)
     public CarPlateDTO getByUuid(@PathVariable(name="uuid") String uuid){
-
+        LOGGER.info("CarPlateController getByUuid: " + uuid);
         final ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", grpcLocalServerPort)
                 .usePlaintext()
                 .build();
@@ -84,6 +87,7 @@ public class CarPlateController {
 
     @RequestMapping(value = "/multiple/{uuid}", method = RequestMethod.GET)
     public List<CarPlateDTO> getByUuidMultiple(@PathVariable(name="uuid") String uuid){
+        LOGGER.info("CarPlateController getByUuidMultiple: " + uuid);
 
         final ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", grpcLocalServerPort)
                 .usePlaintext()
