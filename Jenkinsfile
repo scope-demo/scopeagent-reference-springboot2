@@ -26,7 +26,7 @@ pipeline {
                 }*/
                 stage('JDK11') {
                     steps {
-                        sh 'JDK=11-jdk JAVA_PROFILE=java11 COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2 scopeagent-reference-springboot2'
+                        sh 'IS_CI=true JDK=11-jdk JAVA_PROFILE=java11 COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} up --exit-code-from=scopeagent-reference-springboot2 scopeagent-reference-springboot2'
                     }
                 }
             }
