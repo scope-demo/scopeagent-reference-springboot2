@@ -37,6 +37,7 @@ pipeline {
         always {
             /*sh 'JDK=8-jdk COMMIT=${GIT_COMMIT} docker-compose -p 8-jdk-${GIT_COMMIT} down -v'*/
             sh 'JDK=11-jdk COMMIT=${GIT_COMMIT} docker-compose -p 11-jdk-${GIT_COMMIT} down -v'
+            archive "target/**/*"
         }
     }
 
