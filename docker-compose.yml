@@ -32,6 +32,7 @@ services:
       - IS_CI=${IS_CI}
     volumes:
       - ~/.scope:/root/.scope
+      - ./surefire:/app/target/surefire
     links:
       - mysql-service
     depends_on:
