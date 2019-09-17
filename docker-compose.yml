@@ -32,7 +32,7 @@ services:
       - IS_CI=${IS_CI}
     volumes:
       - ~/.scope:/root/.scope
-      #- /tmp/upload_artifacts:/root/upload_artifacts
+      - ./artifacts:/root/artifacts
     links:
       - mysql-service
     depends_on:
