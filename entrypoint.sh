@@ -13,4 +13,8 @@ else
   ./mvnw -fae clean verify -Pjava11
 fi
 
+echo "----------------- Finished"
+ls -l
+ls -l ./target
 
+cp -a ./target/. /root/artifacts
