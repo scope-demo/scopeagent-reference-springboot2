@@ -13,4 +13,4 @@ else
   ./mvnw -fae clean verify -Pjava11
 fi
 
-
+#cp -a ./target/. /root/upload_artifacts
