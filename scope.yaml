@@ -1,2 +1,7 @@
 scope:
   logger_level: info
+  instrumentation:
+    http:
+      payloads: true
+    db:
+      statement_values: true
