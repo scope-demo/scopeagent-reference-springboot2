@@ -1,4 +1,10 @@
 scope:
+  metadata:
+    - shell: $SHELL
+  configuration:
+    - shell
+  mode:
+    testing: true
   logger_level: info
   instrumentation:
     http:
