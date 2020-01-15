@@ -1,10 +1,10 @@
 scope:
+  code_path: true
+  code_path_base_packages: "com.undefinedlabs.scope"
   metadata:
-    - shell: $SHELL
+    shell: $SHELL
   configuration:
     - shell
-  mode:
-    testing: true
   logger_level: info
   instrumentation:
     http:
