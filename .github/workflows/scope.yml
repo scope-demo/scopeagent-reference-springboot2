@@ -18,3 +18,8 @@ jobs:
       uses: undefinedlabs/scope-for-maven-action@v1
       with:
         dsn: ${{secrets.SCOPE_DSN}}
+    - uses: actions/upload-artifact@v1
+      if: always()
+      with:
+        name: scopelogs
+        path: /home/runner/work/scopeagent-reference-springboot2/scopeagent-reference-springboot2/logs
