@@ -33,7 +33,6 @@
     <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
 
     <grpc-spring-boot-starter.version>3.3.0</grpc-spring-boot-starter.version>
-    <scope.agent.version>0.2.5-beta.4</scope.agent.version>
 
   </properties>
 
@@ -97,13 +96,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.undefinedlabs.scope</groupId>
-      <artifactId>scope-agent</artifactId>
-      <version>${scope.agent.version}</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -191,7 +183,6 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <skipTests>${skipUTs}</skipTests>
-          <argLine>-javaagent:${settings.localRepository}/com/undefinedlabs/scope/scope-agent/${scope.agent.version}/scope-agent-${scope.agent.version}.jar</argLine>
           <includes>
             <include>**/*Test.java</include>
           </includes>
@@ -206,7 +197,6 @@
         <configuration>
           <skipTests>${skipTests}</skipTests>
           <skipITs>${skipITs}</skipITs>
-          <argLine>-javaagent:${settings.localRepository}/com/undefinedlabs/scope/scope-agent/${scope.agent.version}/scope-agent-${scope.agent.version}.jar</argLine>
           <includes>
             <include>**/*IT.java</include>
           </includes>
