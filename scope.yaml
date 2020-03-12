@@ -1,0 +1,11 @@
+logger:
+  level: "debug"
+  root: "/home/runner/work/scopeagent-reference-springboot2/scopeagent-reference-springboot2/logs"
+code_path:
+  enabled: true
+  base_packages: "com.undefinedlabs.scope"
+instrumentation:
+  http:
+    payloads: true
+  db:
+    statement_values: true
